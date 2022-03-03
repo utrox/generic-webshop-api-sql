@@ -1,0 +1,7 @@
+node_modules/*
+.env
+cut-content/*
+public/uploads/*
+!uploads/default.png
+docs
+db/dbConfig.js
