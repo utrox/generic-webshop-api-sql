@@ -1,4 +1,4 @@
 # TODO
 
--write documentation
+- write documentation
 - add Order function
