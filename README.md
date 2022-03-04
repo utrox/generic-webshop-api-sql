@@ -4,6 +4,9 @@ This project is modeled like a typical webshop's `REST API`, using `Node.js`, `E
 #### [Import the Postman configuration for easier API testing!](https://github.com/utrox/generic-webshop-api-sql/tree/main/public/postman-config)
 #### [Check out the MongoDb version of this project too!](https://github.com/utrox/generic-webshop-api)
 
+# DATABASE STRUCTURE
+![SQL database structure](public/postman-config/SQL-relations.png?raw=true "SQL database structure")
+
 # API endpoints 
 
 ## AUTHENTICATION
@@ -540,10 +543,10 @@ Example response:
 
 ## HANDLING IMAGES
 ### Creating Images
-When creating or editing a `Product`, the admin has the option to upload images about the product to the listing. I used the `multer` middleware to be able to access the uploaded files. Once the new `Product`'s been created, the server handles the uploaded images. The server checks if all the files are of image type, and that they are under the given maximum file size limit. The files that fail this verification will be listed in the API response along with the reason why they failed verification. The files that pass the verification get renamed ('*productID*_*nanoID*.jpg'), so that they never overwrite a previously added image. The files that were successfully written to storage are then recorded as images for this particular `Product` in the database.
+When creating or editing a `Product`, the admin has the option to upload images about the product to the listing. I used the `multer` middleware to be able to access the uploaded files. Once the new `Product`'s been created, the server handles the uploaded images. The server checks if all the files are of image type, and that they are under the given maximum file size limit. The files that fail this verification will be listed in the API response along with the reason why they failed verification. The files that pass the verification get renamed ('*productID*_*nanoID*.jpg'), so that they never overwrite a previously added image. The files that were successfully written to storage are then recorded in the `images` table of the database.
 
 ### Removing Images
-When updating a `Product`, the admin has the option to send an array of image names to be removed. If an image exists with this name, and is also listed in the currently edited `Product`'s `images` field, the image gets removed from both the database and the `/uploads` folder. Also, whenever a `Product` is deleted, it's images automatically get deleted from storage.
+When updating a `Product`, the admin has the option to send an array of image names to be removed. If an image exists with this name in the database, and is recorded as an image for the currently edited product, field, the image gets removed from both the database and the `/uploads` folder. Also, whenever a `Product` is deleted, it's images automatically get deleted from both storage and the database.
 
 
 
