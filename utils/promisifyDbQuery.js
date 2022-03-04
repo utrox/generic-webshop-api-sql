@@ -1,3 +1,4 @@
+// returns a Promise while querying the database.
 const promisifyDbQuery = (db, sqlQuery, queryParams) => {
   return new Promise((resolve, reject) => {
     db.query(sqlQuery, queryParams, (err, res) => {
