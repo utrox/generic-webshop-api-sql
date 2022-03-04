@@ -19,6 +19,7 @@ The server validates that both the email address and username are unique and val
 
 ```
 Request body:
+
 {
     "username": <username>;
     "email": <email address>;
@@ -26,6 +27,7 @@ Request body:
 }
 			
 Example Request body:
+
 {
     "username": "bob2", 
     "email": "bob2@email.com", 
@@ -33,6 +35,7 @@ Example Request body:
 }
 
 Example response: 
+
 {
     "msg": "Account successfully created. Please verify your email address before proceeding."
 }
@@ -48,20 +51,24 @@ After providing a username and password, the server searches for the username in
 ```
 
 Request body:
+
 {
     "email": <email address>
     "password": <password>
 }
 
 Example Request body:
+
 {
     "email": "bob2@email.com", 
     "password": "secret"
 }
 
 Example response: 
+
 {
-    "msg": "Logged in successfully."
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJJRCI6MjksInJvbGUiOiJhZG1pbiIsInVzZXJuYW1lIjoiYm9iZWsifSwiaWF0IjoxNjQ2NDMxMDAxLCJleHAiOjE2NDY1MTc0MDF9.8sTeUX2ZU0Oka2qWziVEiUL708z7ZFOBnbvbkSPEM08",
+    "msg": "Login successful."
 }
 		
 ```
@@ -75,6 +82,7 @@ The server sends back a cookie attached to the response overwriting the one cont
 ```
 
 Example response:
+
 {
     msg: "Logged out successfully."
 }
@@ -89,15 +97,18 @@ The server generates a random recovery token that is hashed and stored in the da
 
 ```
 Request body:
+
 {
     "email": <email address>
 }
 
 Example Request body:
+
 {
     "email": "bob2@email.com"
 }
 Example response:
+
 {
     "msg": "Recovery email sent. It expires in 10 minutes."
 }
@@ -112,6 +123,7 @@ After verifying the JWT token, the server gets the user by that ID from the data
 
 ```
 Request body:
+
 {
 
     "newPassword": <new password>,
@@ -121,6 +133,7 @@ Request body:
 }
 
 Example Request body:
+
 {
  "newPassword": "secretpassword", 
  "confirmNewPassword": "secretpassword",
@@ -128,6 +141,7 @@ Example Request body:
 }
 
 Example response:
+
 {
     msg: "Password changed successfully." 
 }
@@ -144,6 +158,7 @@ POST request. Requires admin privileges. Creates the product with the provided p
 
 ```
 Request body:
+
 {
     "title": <title, (max 100 char.)>
     "description": <description (max 500 char.)>
@@ -164,32 +179,29 @@ Example request:
 }
 
 Example response: 
+
 {
-    "msg": "Product succesfully created",
-    "product": {
-        "title": "King-size wooden antic bed",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut dictum massa, eget ullamcorper mi. Phasellus vitae semper nulla. Nullam luctus sapien maximus, eleifend nisi ut, rhoncus neque.
-        "price": 350,
-        "manufacturer": "Undefined",
-        "category": "bedroom",
-        "images": [
-            "62098441dcecc2eaa3d3d48c_DFf0tXNXKwqaCzEncWt1B.jpg"
-        ],
-        "_id": "62098441dcecc2eaa3d3d48c",
-        "id": "62098441dcecc2eaa3d3d48c"
-    },
+    "msg": "Product created successfully with ID 55.",
     "imageHandling": {
         "imageUploadResults": {
             "failed": [
                 {
-                    "image": "text.txt",
+                    "image": "pexels-andrea-piacquadio-3783574.jpg",
+                    "errorCause": "File over limit. (File: 1292421, limit: 1000000 bytes)"
+                },
+                {
+                    "image": "webshop-api SQL.postman_collection.json",
                     "errorCause": "Please only upload image files."
                 }
             ],
             "success": [
                 {
-                    "newName": "62098441dcecc2eaa3d3d48c_DFf0tXNXKwqaCzEncWt1B.jpg",
-                    "originalName": "image.png"
+                    "newName": "55_4WlaOq5KhsWr_jOnEnzyt.jpg",
+                    "originalName": "oldman3.png"
+                },
+                {
+                    "newName": "55_eUmJks1sOlMKL6R4WvsqC.jpg",
+                    "originalName": "oldman4.png"
                 }
             ]
         }
@@ -202,35 +214,45 @@ Example response:
 
 GET request. Doesn't require any privileges. Lists the products that match the provided queries. When accessing this route, the user is able to provide queries in the URL. This makes it possible for them to filter by price, category and manufacturer, search for in the title, and order by any of these properties. 
 
-Example request: 
+Example response: 
 
 `{{domain}}/products/?search={str}&price={num}-{num}&category={str}&manufacturer={str}&order_by={field}`
 
 ```    
+
 {
-{
-    "noProducts": 2,
+    "noProducts": 15,
     "products": [
         {
-            "_id": "620984a9dcecc2eaa3d3d48f",
-            "title": "Generic bed",
-            "description": "This is the description of the product.",
-            "price": 299,
-            "manufacturer": "ikea",
+            "product_id": 45,
+            "title": "King-size wooden antic bed",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut dictum massa, eget ullamcorper mi",
+            "price": 1350,
+            "manufacturer": "Unknown",
             "category": "bedroom",
-            "images": [],
-            "id": "620984a9dcecc2eaa3d3d48f"
+            "images": [
+                "55_4WlaOq5KhsWr_jOnEnzyt.jpg",
+                "55_eUmJks1sOlMKL6R4WvsqC.jpg"
+            ],
+            "noReviews": 13,
+            "avgRating": 4.43
         },
-        {
-            "_id": "q20rq4a9dceew2eaa3d34g3a",
-            "title": "Another bed",
-            "description": "This is the description of the product.",
-            "price": 499,
-            "manufacturer": "ikea",
+	{
+            "product_id": 57,
+            "title": "Ikea bed",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut dictum massa, eget ullamcorper mi",
+            "price": 450,
+            "manufacturer": "Ikea",
             "category": "bedroom",
-            "images": [],
-            "id": "620984a9dcecc2eaa3d3d48f"
+            "images": [
+                "57_LUWxNhkhoBegbLbURzecB.jpg",
+                "57_qbLG0zkgm2bdcBxkyG15J.jpg",
+		"57_gbLR0zZgY2GhrBYkYG95S.jpg"
+            ],
+            "noReviews": 57,
+            "avgRating": 3.93
         },
+	[...]
     ]
 }
 
@@ -249,58 +271,34 @@ Example request:
 Example response: 
 
 {
-    "product": {
-        "_id": "620984a9dcecc2eaa3d3d48f",
-        "title": "New Product",
-        "description": "This is the description of the product.",
-        "price": 299,
-        "manufacturer": "ikea",
-        "category": "kitchen",
-        "images": [],
-        "averageRating": 3.33,
-        "reviews": [
-            {
-                "_id": "62098613dcecc2eaa3d3d49a",
-                "title": "Good product.",
-                "text": "Good product",
-                "user": {
-                    "_id": "6202a6e9c602e34c362464bd",
-                    "username": "guy"
-                },
-                "product": "620984a9dcecc2eaa3d3d48f",
-                "rating": 5,
-                "createdAt": "2022-02-13T22:28:35.282Z",
-                "updatedAt": "2022-02-13T22:28:35.282Z"
-            },
-            {
-                "_id": "6209862adcecc2eaa3d3d4a4",
-                "title": "Average product.",
-                "text": "Average product",
-                "user": {
-                    "_id": "6202a6efc602e34c362464bf",
-                    "username": "bob"
-                },
-                "product": "620984a9dcecc2eaa3d3d48f",
-                "rating": 3,
-                "createdAt": "2022-02-13T22:28:58.318Z",
-                "updatedAt": "2022-02-13T22:28:58.318Z"
-            },
-            {
-                "_id": "6209864bdcecc2eaa3d3d4ac",
-                "title": "Bad product.",
-                "text": "Bad product",
-                "user": {
-                    "_id": "6202d6d9cb1b8b54a1a621f4",
-                    "username": "bob2"
-                },
-                "product": "620984a9dcecc2eaa3d3d48f",
-                "rating": 2,
-                "createdAt": "2022-02-13T22:29:31.137Z",
-                "updatedAt": "2022-02-13T22:29:31.137Z"
-            }
-        ],
-        "id": "620984a9dcecc2eaa3d3d48f"
-    }
+    "product": [
+        {
+            "product_id": 44,
+            "title": "kika bed very nice very",
+            "description": "very nice bed. very good aaaaaaaaa",
+            "price": 500,
+            "manufacturer": "kika",
+            "category": "other",
+            "images": null,
+            "noReviews": 15,
+            "avgRating": "5.00"
+        }
+    ],
+    "reviews": [
+        {
+            "review_title": "Bad product.",
+            "text": "Very bad product",
+            "rating": "2",
+            "poster": "bob"
+        },
+        {
+            "review_title": "Love it",
+            "text": "Very nice product.",
+            "rating": "5",
+            "poster": "bobek"
+        }, 
+	[...]
+    ]
 }
 
 ```
@@ -317,6 +315,7 @@ PATCH request. Requires admin privileges. Gets the `productID` from the URL and 
 ```
 
 Request body:
+
 {
     "title": <new title, (max 100 char. )>
     "description": <new description (max 500 char.)>
@@ -328,8 +327,7 @@ Request body:
 }
 
 Example request:
-
-{{domain}}products/62082d63fd22237a500dd527
+{{domain}}products/55
 
 {
     "title": "New Product name"
@@ -344,41 +342,30 @@ Example request:
 }
 
 Example response: 
+
 {
-    "msg": "Updating the product was successful.",
-    "product": {
-        "_id": "62098851d5fe8975770f174d",
-        "title": "New Product name",
-        "description": "This is the description of the product.",
-        "price": 399,
-        "manufacturer": "ikea",
-        "category": "other",
-        "images": [
-            "62098851d5fe8975770f174d_nIJ2nmJiekYoABqWWuwjS.jpg"
-        ],
-        "id": "62098851d5fe8975770f174d"
-    },
+    "message": "Product successfully updated with ID 55.",
     "imageHandling": {
         "imageUploadResults": {
             "failed": [
                 {
-                    "image": "text.txt",
-                    "errorCause": "Please only upload image files."
+                    "image": "pexels-andrea-piacquadio-3783574.jpg",
+                    "errorCause": "File over limit. (File: 1292421, limit: 1000000 bytes)"
                 }
             ],
             "success": [
                 {
-                    "newName": "62098851d5fe8975770f174d_nIJ2nmJiekYoABqWWuwjS.jpg",
-                    "originalName": "image.png"
+                    "newName": "55_qFCTLYxJj8wnwcLMAvRcQ.jpg",
+                    "originalName": "oldman4.png"
                 }
             ]
         },
         "imageRemoveResults": {
             "success": [
-                "62098851d5fe8975770f174d_G5GvfbsFLhBhNEcTT1LqK.jpg",
-                "62098851d5fe8975770f174d_REV-Rv0qevC7Gu9wSs5xR.jpg"
+                "55_4WlaOq5KhsWr_jOnEnzyt.jpg"
             ],
             "failed": [
+                "51_sYf1XIwhf51ANdq9wyw0V.jpg",
                 "nonexistent.jpg"
             ]
         }
@@ -388,7 +375,7 @@ Example response:
 ```
 
 ### Delete Product
-`{{domain}}products/62082d63fd22237a500dd527`
+`{{domain}}products/55`
 
 DELETE request. Requires admin privileges. Gets the `productID` from the URL.
 If the product with this ID exists in the database, it gets removed. Before removing the product, all of the reviews about that product (any review that reference the product's ID in their 'product_id' field) also get deleted. 
@@ -396,8 +383,9 @@ If the product with this ID exists in the database, it gets removed. Before remo
 ```
 
 Example response 
-{			
-    "msg": "Product successfully deleted with id '62098851d5fe8975770f174d'"
+
+{
+    "msg": "Product with ID '55' along with reviews and images about the product were successfully deleted."
 }
 
 ```
@@ -415,6 +403,7 @@ The server checks if a product with the provided `productID` exists in the datab
 
 ```
 Request body:
+
     {
         "product": <productID>,
         "rating" : <number between 1 and 5>,
@@ -425,25 +414,16 @@ Request body:
 Example request:
 
     {
-        "product": "62082d63fd22237a500dd527",
+        "product": "55",
         "rating" : 5,
         "title": "Great product.",
         "text": "Amazing product, lived up to my expectations. "
     }
 
 Example response:  
+
     {
-        "msg": "Review succesfully created",
-        "review": {
-            "title": "Great product.",
-            "text": "Great product. Very satisfied.",
-            "user": "6202d6d9cb1b8b54a1a621f4",
-            "product": "620984a9dcecc2eaa3d3d48f",
-            "rating": 5,
-            "_id": "6209864bdcecc2eaa3d3d4ac",
-            "createdAt": "2022-02-13T22:29:31.137Z",
-            "updatedAt": "2022-02-13T22:29:31.137Z"
-        }
+    "message": "Review about product created successfully with ID 29"
     }
 ```
 
@@ -456,26 +436,14 @@ Checks if the review with the specified `reviewID` exists. If so, sends back a r
 ```
 
 Example response: 
+
 {
-    "review": {
-        "_id": "6208ed9389379a3d2ac85328",
-        "title": "Love it",
-        "text": "Review text",
-        "user": {
-            "_id": "6202a6e9c602e34c362464bd",
-            "username": "guy"
-        },
-        "product": {
-            "_id": "6208e10ff5b62f1b40669289",
-            "title": "New Product",
-            "price": 299,
-            "manufacturer": "ikea",
-            "id": "6208e10ff5b62f1b40669289"
-        },
-        "rating": 4,
-        "createdAt": "2022-02-13T11:37:55.869Z",
-        "updatedAt": "2022-02-13T18:30:41.302Z"
-    }
+    "product_id": 45,
+    "product_name": "New Product Title",
+    "review_title": "Good product.",
+    "text": "Very good product!",
+    "rating": 5,
+    "poster": "bobek"
 }
 
 ```
@@ -498,26 +466,16 @@ Request body:
 
 Example request:
 
-    {
-        "rating": 2,
-        "text": "At first I tought this was a good product, but it broke after two weeks. "
-    }
+{
+	"rating": 2,
+	"text": "At first I tought this was a good product, but it broke after two weeks. "
+}
 
 
 Example response:
 
 {
-    "msg": "Review successfully edited with id '6208ed9389379a3d2ac85328'",
-    "review": {
-        "_id": "6208ed9389379a3d2ac85328",
-        "title": "Review about this item",
-        "text": "At first I tought this was a good product, but it broke after two weeks. ",
-        "user": "6202a6e9c602e34c362464bd",
-        "product": "6208e10ff5b62f1b40669289",
-        "rating": 2,
-        "createdAt": "2022-01-30T11:37:55.869Z",
-        "updatedAt": "2022-02-13T22:52:09.501Z"
-    }
+    "message": "Review successfully modified with ID 29"
 }
 
 
@@ -531,9 +489,10 @@ Checks if the review with the specified reviewID exists. If so, the server remov
 
 ```
 Example response:
-    {
-        "msg": "Review successfully deleted with id '6208335c329b5b05be326c0e'"
-    }
+
+{
+    "message": "Review successfully deleted."
+}
 
 ```
 
