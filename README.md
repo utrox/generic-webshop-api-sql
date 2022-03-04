@@ -4,7 +4,7 @@ This project is modeled like a typical webshop's `REST API`, using `Node.js`, `E
 #### [Import the Postman configuration for easier API testing!](https://github.com/utrox/generic-webshop-api-sql/tree/main/public/postman-config)
 #### [Check out the MongoDb version of this project too!](https://github.com/utrox/generic-webshop-api)
 
-# DATABASE STRUCTURE
+## DATABASE STRUCTURE
 ![SQL database structure](public/postman-config/SQL-relations.png?raw=true "SQL database structure")
 
 # API endpoints 
