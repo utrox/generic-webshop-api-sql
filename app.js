@@ -11,7 +11,6 @@ const cors = require("cors");
 const xss = require("xss-clean");
 
 // security middlewares
-
 app.set("trust proxy", 1);
 // allow only 40 requests per 5 minutes from an adress.
 app.use(

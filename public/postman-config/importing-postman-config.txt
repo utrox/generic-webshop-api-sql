@@ -4,3 +4,4 @@
 - Open Postman, and click on `File --> Import`
 - Select the .json file containing the config
 - Click on `Import`
+- Profit

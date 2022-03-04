@@ -10,6 +10,7 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../controllers/productController");
+
 const {
   authMiddleware,
   checkAdminPermission,

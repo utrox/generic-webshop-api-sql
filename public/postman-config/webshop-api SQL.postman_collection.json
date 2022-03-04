@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "c5a1eb40-7210-4653-ad80-9663c839ce1d",
-		"name": "webshop-api SQL",
+		"_postman_id": "0846bf96-69d7-477a-a3fc-687fd9058979",
+		"name": "webshop-api SQL Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"bobek2\", \"email\": \"bobek2@email.com\", \"password\": \"secret\"\r\n}",
+							"raw": "{\r\n    \"username\": \"<username>\",\r\n    \"email\": \"<email adress>\", \r\n    \"password\": \"<password>\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"activationToken\": \"d0750f2dfc6e191ff7c5822a98307855829da7f885e9301dd2d9350198ba4e7c56435afcc7d64d3d6fba0de783e3b210\" \r\n}",
+							"raw": "{\r\n    \"activationToken\": \"<activation token>\" \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -73,7 +73,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"bobek\", \"email\": \"bobek1@email.com\", \"password\": \"secret\"\r\n}",
+							"raw": "{\r\n    \"username\": \"<username>\",\r\n    \"email\": \"<email>\",\r\n    \"password\": \"<password>\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -122,7 +122,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"bobek2@email.com\"\r\n}",
+							"raw": "{\r\n    \"email\": \"<email adress>\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -151,7 +151,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"newPassword\": \"asd123\", \r\n \"confirmNewPassword\": \"asd123\",\r\n \"recoveryJWT\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJJRCI6MzksInJlY292ZXJ5VG9rZW4iOiI3ZGVmOGFjYTYzY2Q0ODIwY2I4NWU3ZDdhMzQzZWM5NSJ9LCJpYXQiOjE2NDYzMjg3MDYsImV4cCI6MTY0NjMyOTMwNn0.-4nb4UiFJ-N9uyptjLG6am-lBLLfoAaU9pde-9KDu6g\"\r\n}",
+							"raw": "{\r\n \"newPassword\": \"<new passowrd>\", \r\n \"confirmNewPassword\": \"<new password again>\",\r\n \"recoveryJWT\": \"<token from email>\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -191,27 +191,27 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "newest product",
+									"value": "title",
 									"type": "default"
 								},
 								{
 									"key": "description",
-									"value": "AAAAAAAAAAAAAAA",
+									"value": "description",
 									"type": "default"
 								},
 								{
 									"key": "price",
-									"value": "550",
+									"value": "price",
 									"type": "default"
 								},
 								{
 									"key": "manufacturer",
-									"value": "bbbasdasdasdasdas",
+									"value": "manufacturer",
 									"type": "default"
 								},
 								{
 									"key": "category",
-									"value": "bedroom",
+									"value": "category",
 									"type": "default"
 								},
 								{
@@ -259,7 +259,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/api/v1/products/?price=-2000&manufacturer=kika&category=of&order_by=price&search=new",
+							"raw": "{{URL}}/api/v1/products/?price=min-max&manufacturer=manufacturer&category=category&order_by=field&search=search in title",
 							"host": [
 								"{{URL}}"
 							],
@@ -272,23 +272,28 @@
 							"query": [
 								{
 									"key": "price",
-									"value": "-2000"
+									"value": "min-max",
+									"description": "optional"
 								},
 								{
 									"key": "manufacturer",
-									"value": "kika"
+									"value": "manufacturer",
+									"description": "optional"
 								},
 								{
 									"key": "category",
-									"value": "of"
+									"value": "category",
+									"description": "optional"
 								},
 								{
 									"key": "order_by",
-									"value": "price"
+									"value": "field",
+									"description": "optional"
 								},
 								{
 									"key": "search",
-									"value": "new"
+									"value": "search in title",
+									"description": "optional"
 								}
 							]
 						}
@@ -301,7 +306,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/v1/products/51",
+							"raw": "{{URL}}/api/v1/products/<product_id>",
 							"host": [
 								"{{URL}}"
 							],
@@ -309,7 +314,7 @@
 								"api",
 								"v1",
 								"products",
-								"51"
+								"<product_id>"
 							]
 						}
 					},
@@ -338,43 +343,38 @@
 								},
 								{
 									"key": "price",
-									"value": "444",
+									"value": "edited price",
 									"type": "text"
 								},
 								{
 									"key": "manufacturer",
-									"value": "spar",
+									"value": "edited manufacturer",
 									"type": "text"
 								},
 								{
 									"key": "category",
-									"value": "other",
+									"value": "edited category",
 									"type": "text"
 								},
 								{
 									"key": "imagesToRemove",
-									"value": "51_3-5XR8c9XBd0ZgCzTNpiI.jpg",
+									"value": "image_name1.jpg",
 									"type": "text"
 								},
 								{
 									"key": "imagesToRemove",
-									"value": "nonexistent.jpg",
+									"value": "image_name2.jpg",
 									"type": "default"
 								},
 								{
 									"key": "imagesToRemove",
-									"value": "51_sYf1XIwhf51ANdq9wyw0V.jpg",
+									"value": "...",
 									"type": "text"
 								},
 								{
 									"key": "imagesToAdd",
 									"type": "file",
-									"src": [
-										"/C:/Users/Bence/Desktop/pics/oldman2.png",
-										"/C:/Users/Bence/Desktop/pics/oldman3.png",
-										"/C:/Users/Bence/Desktop/pics/oldman4.png",
-										"/C:/Users/Bence/Desktop/pics/pexels-andrea-piacquadio-3783574.jpg"
-									]
+									"src": []
 								}
 							],
 							"options": {
@@ -384,7 +384,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/api/v1/products/51",
+							"raw": "{{URL}}/api/v1/products/<product_id>",
 							"host": [
 								"{{URL}}"
 							],
@@ -392,7 +392,7 @@
 								"api",
 								"v1",
 								"products",
-								"51"
+								"<product_id>"
 							]
 						}
 					},
@@ -404,7 +404,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/v1/products/51",
+							"raw": "{{URL}}/api/v1/products/<product_id>",
 							"host": [
 								"{{URL}}"
 							],
@@ -412,7 +412,7 @@
 								"api",
 								"v1",
 								"products",
-								"51"
+								"<product_id>"
 							]
 						}
 					},
@@ -430,7 +430,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product\": \"51\",\r\n    \"rating\" : 1,\r\n    \"title\": \"Shit product.\",\r\n    \"text\": \"Shit product\"\r\n}",
+							"raw": "{\r\n    \"product\": \"<product_id> (optional)\",\r\n    \"rating\" : \"<rating 1-5 >\",\r\n    \"title\": \"<title of review> (optional)\",\r\n    \"text\": \"<description of review> (optional)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -457,7 +457,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/v1/reviews/6",
+							"raw": "{{URL}}/api/v1/reviews/<review_id>",
 							"host": [
 								"{{URL}}"
 							],
@@ -465,7 +465,7 @@
 								"api",
 								"v1",
 								"reviews",
-								"6"
+								"<review_id>"
 							]
 						}
 					},
@@ -478,7 +478,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"CCCCCC\"\r\n}",
+							"raw": "{\r\n    \"rating\" : \"<rating 1-5 >\",\r\n    \"title\": \"<title of review> (optional)\",\r\n    \"text\": \"<description of review> (optional)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -486,7 +486,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/api/v1/reviews/27",
+							"raw": "{{URL}}/api/v1/reviews/<review_id>",
 							"host": [
 								"{{URL}}"
 							],
@@ -494,7 +494,7 @@
 								"api",
 								"v1",
 								"reviews",
-								"27"
+								"<review_id>"
 							]
 						}
 					},
@@ -506,7 +506,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/v1/reviews/27",
+							"raw": "{{URL}}/api/v1/reviews/<review_id>",
 							"host": [
 								"{{URL}}"
 							],
@@ -514,7 +514,7 @@
 								"api",
 								"v1",
 								"reviews",
-								"27"
+								"<review_id>"
 							]
 						}
 					},
